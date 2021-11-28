@@ -42,6 +42,7 @@ class App extends Component {
       imageUrl: "",
       box: {},
       route: "Signin",
+      isSignedIn: false,
     };
   }
 
@@ -63,7 +64,6 @@ class App extends Component {
 
   // This shows the blue box that finds the face of the image
   showBox = (box) => {
-    console.log(box);
     this.setState({ box: box });
   };
 
@@ -74,7 +74,6 @@ class App extends Component {
 
   //Detect Submit Button
   onButtonSubmit = (event) => {
-    console.log("click");
     //Pass input through imageUrl - Add imageUrl in FaceRecognition below and pass it through
     this.setState({ imageUrl: this.state.input });
 
@@ -85,15 +84,24 @@ class App extends Component {
   };
 
   onRouteChange = (route) => {
+    if (route === "Signout") {
+      this.setState({ isSignedIn: false });
+    } else if (route === "Home") {
+      this.setState({ isSignedIn: true });
+    }
     this.setState({ route: route });
   };
 
   render() {
+    const { isSignedIn, imageUrl, route, box } = this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
-        <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === "home" ? (
+        <Navigation
+          isSignedIn={isSignedIn}
+          onRouteChange={this.onRouteChange}
+        />
+        {route === "Home" ? (
           <div>
             <Logo />
             <Rank />
@@ -101,12 +109,9 @@ class App extends Component {
               onInputChange={this.onInputChange}
               onButtonSubmit={this.onButtonSubmit}
             />
-            <FaceRecognition
-              imageUrl={this.state.imageUrl}
-              box={this.state.box}
-            />
+            <FaceRecognition imageUrl={imageUrl} box={box} />
           </div>
-        ) : this.state.route === "Signin" ? (
+        ) : route === "Signin" ? (
           <Signin onRouteChange={this.onRouteChange} />
         ) : (
           <Register onRouteChange={this.onRouteChange} />

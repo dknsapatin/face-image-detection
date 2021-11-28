@@ -4,11 +4,11 @@ const Signin = ({ onRouteChange }) => {
   return (
     <article className="br3 ba dark-gray b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
       <main className="pa4 black-80">
-        <form className="measure ">
+        <div className="measure ">
           <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
             <legend className="f2 fw6 ph0 mh0">Sign In</legend>
             <div className="mt3">
-              <label className="db fw6 lh-copy f6" for="email-address">
+              <label className="db fw6 lh-copy f6" htmlfor="email-address">
                 Email
               </label>
               <input
@@ -19,7 +19,7 @@ const Signin = ({ onRouteChange }) => {
               />
             </div>
             <div className="mv3">
-              <label className="db fw6 lh-copy f6" for="password">
+              <label className="db fw6 lh-copy f6" htmlfor="password">
                 Password
               </label>
               <input
@@ -32,7 +32,7 @@ const Signin = ({ onRouteChange }) => {
           </fieldset>
           <div className="">
             <input
-              onClick={() => onRouteChange("home")}
+              onClick={() => onRouteChange("Home")}
               className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
               type="submit"
               value="Sign in"
@@ -47,7 +47,7 @@ const Signin = ({ onRouteChange }) => {
               Register
             </p>
           </div>
-        </form>
+        </div>
       </main>
     </article>
   );
